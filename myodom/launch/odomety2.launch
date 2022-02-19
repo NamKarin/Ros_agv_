@@ -1,0 +1,27 @@
+<launch>
+
+<!--- Start arduino serial interface --> 
+
+	<node pkg="rosserial_arduino" type="serial_node.py" name="rosserial" respawn="true"  args="_port:=/dev/ttyUSB1"/>
+
+<!--- Start laser scan --> 
+
+	<node pkg="rplidar_ros" type="rplidarNode" name="rplidarNode" output="screen">
+
+	<param name="serial_port" type="string" value="/dev/ttyUSB0"/>
+
+	</node>
+	
+<!-- node TF -->
+
+	<!--<node pkg="tf" type="static_transform_publisher" name="base_link" args="0.0 0.0 0.0 0.0 0.0 0.20 base_link laser_frame 80"/>-->
+	<!--<node pkg="test_tf" type="test_tf" name="base_2_laser" args="0.08 0 0.09 3.14 0 0  base_link laser_frame 80" />-->
+	<node pkg="tf" type="static_transform_publisher" name="base_link" args="0.08 0 0.09 3.14 0 0  base_footprint laser_frame 80" />
+	
+<!--- odom -->
+	
+	<node name ="odom" pkg="myodom" type="odom" output="screen"/>
+	
+	
+	
+</launch>

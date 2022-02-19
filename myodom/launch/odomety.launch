@@ -1,0 +1,9 @@
+<launch>
+
+<!--- Start arduino serial interface --> 
+
+	<node pkg="rosserial_arduino" type="serial_node.py" name="rosserial" respawn="true"  args="_port:=/dev/ttyUSB1"/>
+	
+<!--- odom -->
+	<node name ="odom" pkg="myodom" type="odom" output="screen"/>
+</launch>
